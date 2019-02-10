@@ -1,5 +1,15 @@
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134149191-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-134149191-1');
+    </script>
+
     <title>Kanji Sheets</title>
     <link href="/kanji/css/main.css" rel="stylesheet" type="text/css" />
 
@@ -67,6 +77,7 @@
           </div>
         </div>
         <span class="author">made by <a href="https://twitter.com/jensechu">jensen</a> with &#9829;</span>
+        <span class="author">forked and updated by<a href="https://github.com/avasilkov">Alexei Vasilkov</a></span>
       </div> <!-- KANJI SELECTOR -->
 
       <div id="content" class="handwriting">
@@ -95,6 +106,9 @@
           <div class="kanji-box kanji-character"></div>
           <div class="kanji-box kanji-character"></div>
           <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
           <div class="kanji-box"></div>
           <div class="kanji-box"></div>
           <div class="kanji-box"></div>
@@ -115,16 +129,6 @@
 
     </div> <!-- CONTAINER -->
 
-
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-54176113-1', 'auto');
-      ga('send', 'pageview');
-    </script>
 
     <script src="/kanji/js/kanji.js"></script>
     <script src="/kanji/js/waniKani.js"></script>
