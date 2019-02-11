@@ -1,5 +1,8 @@
 <html>
   <head>
+   <meta charset="UTF-8">
+   <meta name="description" content="Create Japanese training trace sheets with Kanji, Hiragana, Katakana. Use wanikani api to generate a training sheets in accordancewith your progress">
+   <meta name="keywords" content="hiragana,katakana,kanji,japanese trace sheets,japanese training sheets,japanese,learning japanese">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134149191-1"></script>
     <script>
@@ -10,7 +13,7 @@
       gtag('config', 'UA-134149191-1');
     </script>
 
-    <title>Kanji Sheets</title>
+    <title>Kanji training sheets. Now with Kana!</title>
     <link href="/kanji/css/main.css" rel="stylesheet" type="text/css" />
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -27,10 +30,13 @@
         <div class="categoryBox">
           <div class="settings">
             <button class="kanjiSubmit">Go</button> <input type="text" placeholder="Search Kanji" class="kanjiSearch"/>
+          </div>
+            <div style="display: block!important;">
             <div class="kanjiStrokes">
               <span>Strokes:</span> <span class="strokeToggle">&nbsp;</span>
             </div>
-          </div>
+                <label for="gray-kanji">&nbsp;#traces: </label><input id="number-of-traces" type="number" value="2" min="0" max="17" onchange="tracesNumberChange(this.value)"/>
+            </div>
           <div class="settings-content">
           </div>
         </div>
@@ -76,8 +82,21 @@
             </div>
           </div>
         </div>
+
+        <div class="categoryBox" data-category="hiragana">
+          <h2 class="category">Hiragana</h2>
+          <div class="category-content">
+          </div>
+        </div>
+
+        <div class="categoryBox" data-category="katakana">
+          <h2 class="category">Katakana</h2>
+          <div class="category-content">
+          </div>
+        </div>
+
         <span class="author">made by <a href="https://twitter.com/jensechu">jensen</a> with &#9829;</span>
-        <span class="author">forked and updated by<a href="https://github.com/avasilkov">Alexei Vasilkov</a></span>
+        <span class="author2">forked and updated by <a href="https://github.com/avasilkov/kanji">Alexei Vasilkov</a></span>
       </div> <!-- KANJI SELECTOR -->
 
       <div id="content" class="handwriting">
@@ -94,36 +113,42 @@
       <div id="kanjiTemplate">
         <div class="kanji-row">
           <dl class="kanji-data">
-            <dt class="kanji-term">Meaning:</dt>
-            <dd class="kanji-definition kanji-meaning">Every</dd>
+            <div class="kanji-descr">
+                <dt class="kanji-term">Meaning:</dt>
+                <dd class="kanji-definition kanji-meaning">Every</dd>
 
-            <dt class="kanji-term">On Reading:</dt>
-            <dd class="kanji-definition kanji-onyomi">マイ</dd>
+                <dt class="kanji-term">On Reading:</dt>
+                <dd class="kanji-definition kanji-onyomi">マイ</dd>
 
-            <dt class="kanji-term">Kun Reading:</dt>
-            <dd class="kanji-definition kanji-kunyomi">ごと</dd>
+                <dt class="kanji-term">On Reading:</dt>
+                <dd class="kanji-definition kanji-onyomi">マイ</dd>
+
+                <dt class="kanji-term">Kun Reading:</dt>
+                <dd class="kanji-definition kanji-kunyomi">ごと</dd>
+            </div>
+            <div class="kana-descr">
+                <dt class="kanji-term">Romaji:</dt>
+                <dd class="kanji-definition kanji-romaji">マイ</dd>
+            </div>
           </dl>
+          <div class="kanji-box kanji-character main-kanji"></div>
           <div class="kanji-box kanji-character"></div>
           <div class="kanji-box kanji-character"></div>
           <div class="kanji-box kanji-character"></div>
           <div class="kanji-box kanji-character"></div>
           <div class="kanji-box kanji-character"></div>
           <div class="kanji-box kanji-character"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
-          <div class="kanji-box"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
+          <div class="kanji-box kanji-character"></div>
         </div><!-- KANJI ROW -->
       </div>
 

@@ -13272,6 +13272,26 @@
             "onyomi": "ショウ ソウ ハヤ.",
             "kunyomi": "",
             "meaning": "victory, fast"
+        }, {
+            "category": "jlptn1",
+            "character": "あ",
+            "onyomi": "ショウ ソウ ハヤ.",
+            "kunyomi": "",
+            "meaning": "victory, fast"
         }
-    ]
+    ],
+    "kana": {
+      "hiragana": [
+        {
+          "character": "あ",
+          "romaji": "a"
+        }
+      ],
+      "katakana": [
+        {
+          "character": "ン",
+          "romaji": "so"
+        }
+      ]
+    }
 }

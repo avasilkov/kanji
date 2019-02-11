@@ -1,3 +1,25 @@
+function iskana(s){
+  return ['hiragana', 'katakana'].includes(s);
+}
+
+function tracesNumberChange(newVal){
+  let boxes = $('#content .kanji-box.kanji-character');
+  let maxLength = $('#kanjiTemplate .kanji-box.kanji-character').length;
+  boxes.each(function(i, el){
+    let n = i % maxLength;
+    console.log(i + ' ' + n);
+    if(n > 0 && n <= newVal){
+      console.log(newVal);
+      $(el).removeClass('invisible-kanji');
+      $(el).addClass('trace-kanji');
+    }else{
+      $(el).removeClass('trace-kanji');
+      $(el).addClass('invisible-kanji');
+    }
+  });
+}
+tracesNumberChange(2);
+
 window.Kanji =  {
 
   SELECTOR_TEMPLATE:    $('#selectorTemplate').html().trim(),
@@ -7,12 +29,16 @@ window.Kanji =  {
   $category:            $('#kanjiSelectionBox .category'),
 
   _getKanjiData: function($selectedKanji) {
-    var kanji = {};
-
-    kanji['character'] = $selectedKanji.data('character');
-    kanji['meaning']   = $selectedKanji.data('meaning');
-    kanji['onyomi']    = $selectedKanji.data('onyomi');
-    kanji['kunyomi']   = $selectedKanji.data('kunyomi');
+    var kanji = {category: $selectedKanji.parent().parent().data('category')};
+    if(iskana(kanji['category'])){
+      kanji['character'] = $selectedKanji.data('character');
+      kanji['romaji']   = $selectedKanji.data('romaji');
+    }else{
+      kanji['character'] = $selectedKanji.data('character');
+      kanji['meaning']   = $selectedKanji.data('meaning');
+      kanji['onyomi']    = $selectedKanji.data('onyomi');
+      kanji['kunyomi']   = $selectedKanji.data('kunyomi');
+    }
 
       Kanji._setKanjiRow(kanji);
   },
@@ -74,20 +100,32 @@ window.Kanji =  {
     $('.kanji-row[data-character="'+ existingKanji +'"]').remove();
   },
 
-  _setKanjiRow: function(kanji, cb) {
+  _setKanjiRow: function(kanji) {
     var $kanjiRow       = $(Kanji.KANJI_TEMPLATE);
     var $kanjiCharacter = $kanjiRow.find('.kanji-character');
+    $kanjiCharacter.text(kanji.character);
     var $kanjiMeaning   = $kanjiRow.find('.kanji-meaning');
     var $kanjiOnyomi    = $kanjiRow.find('.kanji-onyomi');
     var $kanjiKunyomi   = $kanjiRow.find('.kanji-kunyomi');
-
-    $kanjiCharacter.text(kanji.character);
-    $kanjiMeaning.text(kanji.meaning);
-    $kanjiOnyomi.text(kanji.onyomi);
-    $kanjiKunyomi.text(kanji.kunyomi);
+    var $kanjiRomaji = $kanjiRow.find('.kanji-romaji');
+    let $kanjiDescr = $kanjiRow.find('.kanji-descr');
+    let $kanaDescr = $kanjiRow.find('.kana-descr');
+    if(iskana(kanji.category)){
+      $kanjiDescr.hide();
+      $kanaDescr.show();
+      $kanjiRomaji.text(kanji.romaji);
+    }else{
+      $kanaDescr.hide();
+      $kanjiDescr.show();
+      $kanjiMeaning.text(kanji.meaning);
+      $kanjiOnyomi.text(kanji.onyomi);
+      $kanjiKunyomi.text(kanji.kunyomi);
+    }
     $kanjiRow.attr('data-character', kanji.character);
 
     Kanji.$contentBox.prepend($kanjiRow);
+
+    tracesNumberChange($('#number-of-traces').val());
   },
 
   _setKanjiSelector: function(kanji) {
@@ -95,13 +133,19 @@ window.Kanji =  {
     $categoryBox.append(Kanji.SELECTOR_TEMPLATE);
 
     var $kanjiSelector = $categoryBox.children().last('li');
-
-    $kanjiSelector.attr({
-      'data-character': kanji.character,
-      'data-meaning':   kanji.meaning,
-      'data-onyomi':    kanji.onyomi,
-      'data-kunyomi':   kanji.kunyomi
-    });
+    if(iskana(kanji.category)){
+      $kanjiSelector.attr({
+        'data-character': kanji.character,
+        'data-romaji':   kanji.romaji
+      });
+    }else{
+      $kanjiSelector.attr({
+        'data-character': kanji.character,
+        'data-meaning':   kanji.meaning,
+        'data-onyomi':    kanji.onyomi,
+        'data-kunyomi':   kanji.kunyomi
+      });
+    }
 
     $kanjiSelector.text(kanji.character);
   },
@@ -129,6 +173,14 @@ window.Kanji =  {
   _load: function() {
     $.getJSON('data/kanji.json', function(data) {
       $.each( data.kanji, function( i, kanji ) {
+	       Kanji._setKanjiSelector(kanji, null);
+      });
+      $.each( data.kana.hiragana, function( i, kanji ) {
+        kanji.category = 'hiragana';
+	       Kanji._setKanjiSelector(kanji);
+      });
+      $.each( data.kana.katakana, function( i, kanji ) {
+        kanji.category = 'katakana';
 	       Kanji._setKanjiSelector(kanji);
       });
     }).done(function(){
