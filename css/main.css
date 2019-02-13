@@ -58,7 +58,7 @@ body {
   font-size: 13px;
 }
 
-.kanjiStrokes .strokeToggle {
+.kanjiStrokes .optionToggle {
   height: 15px;
   width: 15px;
   content: '';
@@ -70,7 +70,7 @@ body {
   box-shadow: inset 0 0 0 2px #fff;
 }
 
-.kanjiStrokes .strokeToggle.selected {
+.kanjiStrokes .optionToggle.selected {
   background-color: pink;
 }
 
@@ -141,9 +141,7 @@ body {
 .invisible-kanji {
   color: white;
 }
-#content .main-kanji{
-    color: black;
-}
+
 /*
 
 #content .kanji-box:nth-child(n+5) {
@@ -175,24 +173,29 @@ body {
 
 #content.handwriting .kanji-box {
   font-family: Mitimasu;
-  font-size: 85px;
-  line-height: 95px;
+  font-size: 65px;
+  line-height: 75px;
 }
 
 #content.stroke-order .kanji-box {
   font-family: StrokeOrder;
-  font-size: 80px;
+  font-size: 65px;
 }
 
 #content .kanji-box {
     margin: 0 5px 5px 0;
-    width: 96px;
-    height: 96px;
+    width: 76px;/*96px*/
+    height: 76px;
     border: 1px solid #000;
     box-sizing: border-box;
     float: left;
     font-size: 65px;
     text-align: center;
+
+  color: rgba(0, 0, 0, 0.15);
+}
+#content .main-kanji{
+    color: black;
 }
 .author2 {
   position: absolute;
@@ -207,6 +210,12 @@ body {
   bottom: 55px;
   font-size: 12px;
   z-index: 0;
+}
+.mesh {
+  background-color: transparent;
+  background-image: linear-gradient(0deg, transparent 24%, rgba(0, 0, 0, .05) 25%, rgba(0, 0, 0, .05) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, .05) 75%, rgba(0, 0, 0, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 0, 0, .05) 25%, rgba(0, 0, 0, .05) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, .05) 75%, rgba(0, 0, 0, .05) 76%, transparent 77%, transparent);
+  height:100%;
+  #background-size:50px 50px;
 }
 
 .author a, author2 a {

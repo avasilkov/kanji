@@ -2,6 +2,8 @@
 
 This is a small javascript powered site that takes in `.json` data of kanji and outputs a selection box. By selecting these kanji you can make your own kanji worksheets tailored to your practicing needs.
 
+Forked from https://github.com/jensechu/kanji
+
 ### Changelog by Alexei Vasilkov:
 
 - Added Hiragana and Katakana characters

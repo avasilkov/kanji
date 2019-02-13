@@ -7,18 +7,16 @@ function tracesNumberChange(newVal){
   let maxLength = $('#kanjiTemplate .kanji-box.kanji-character').length;
   boxes.each(function(i, el){
     let n = i % maxLength;
-    console.log(i + ' ' + n);
-    if(n > 0 && n <= newVal){
-      console.log(newVal);
-      $(el).removeClass('invisible-kanji');
-      $(el).addClass('trace-kanji');
+    if(n <= newVal){
+      $(el).text($(el).data('char'));
     }else{
-      $(el).removeClass('trace-kanji');
-      $(el).addClass('invisible-kanji');
+      $(el).text('');
     }
   });
 }
-tracesNumberChange(2);
+function rowsNumberChange(newVal){
+
+}
 
 window.Kanji =  {
 
@@ -81,6 +79,21 @@ window.Kanji =  {
     $selectedCategory.siblings('.category-content').addClass('expand');
   },
 
+  _handleMeshToggle: function() {
+    var $strokeToggle = $('.meshToggle');
+
+    $strokeToggle.on('click', function() {
+      Kanji.toggleMesh();
+    });
+  },
+
+  toggleMesh: function() {
+    var $strokeToggle = $('.meshToggle');
+
+    $strokeToggle.toggleClass('selected');
+    $('.kanji-box').toggleClass('mesh');
+  },
+
   _handleStrokeToggle: function() {
     var $strokeToggle = $('.strokeToggle');
 
@@ -104,6 +117,7 @@ window.Kanji =  {
     var $kanjiRow       = $(Kanji.KANJI_TEMPLATE);
     var $kanjiCharacter = $kanjiRow.find('.kanji-character');
     $kanjiCharacter.text(kanji.character);
+    $kanjiCharacter.data('char', kanji.character);
     var $kanjiMeaning   = $kanjiRow.find('.kanji-meaning');
     var $kanjiOnyomi    = $kanjiRow.find('.kanji-onyomi');
     var $kanjiKunyomi   = $kanjiRow.find('.kanji-kunyomi');
@@ -188,6 +202,10 @@ window.Kanji =  {
       Kanji._handleSectionExpansion();
       Kanji._handleKanjiSearch();
       Kanji._handleStrokeToggle();
+      Kanji._handleMeshToggle();
+      tracesNumberChange(2);
+      rowsNumberChange(2);
+
     });
   }
 };
